@@ -53,17 +53,36 @@ export const useAuthStore = create((set, get) => ({
       set({ isLoggingIn: false });
     }
   },
+logout: async () => {
+  try {
+    const response = await axiosInstance.post("/auth/logout");
+    console.log("Logout response:", response.data);
 
-  logout: async () => {
-    try {
-      await axiosInstance.post("/auth/logout");
-      get().disconnectSocket();
-      set({ authUser: null });
-      toast.success("Logged out successfully");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Logout failed");
+    const socketDisconnector = get().disconnectSocket;
+    if (typeof socketDisconnector === "function") {
+      socketDisconnector();
+    } else {
+      console.warn("disconnectSocket is not a function");
     }
-  },
+
+    set({ authUser: null });
+    toast.success("Logged out successfully");
+  } catch (error) {
+    console.error("Logout failed:", error);
+    toast.error(error.response?.data?.message || "Logout failed");
+  }
+},
+
+  // logout: async () => {
+  //   try {
+  //     await axiosInstance.post("/auth/logout");
+  //     get().disconnectSocket();
+  //     set({ authUser: null });
+  //     toast.success("Logged out successfully");
+  //   } catch (error) {
+  //     toast.error(error.response?.data?.message || "Logout failed");
+  //   }
+  // },
    
 
   
