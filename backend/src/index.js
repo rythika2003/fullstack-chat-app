@@ -11,7 +11,7 @@ import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
 // For ES module compatibility (because you're using `import`)
-const __filename = fileURLToPath(import.meta.url);
+// const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 
 dotenv.config();
