@@ -4,18 +4,15 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-// For ES module compatibility (because you're using `import`)
-const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-
 import authRoutes from "./routes/auth.route.js";
 import userRoutes from "./routes/user.routes.js";
 import messageRoutes from "./routes/message.route.js";
 
 import { connectDB } from "./lib/db.js";
 import { app, server } from "./lib/socket.js";
+// For ES module compatibility (because you're using `import`)
+const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 
 dotenv.config();
 
@@ -50,9 +47,9 @@ if(process.env.NODE_ENV==="production"){
   })
 }
 
-app.get("/", (req, res) => {
-  res.send("Chat App Backend is Running");
-});
+// app.get("/", (req, res) => {
+//   res.send("Chat App Backend is Running");
+// });
 
 server.listen(PORT, () => {
   console.log(`🚀 Server is running on PORT: ${PORT}`);
