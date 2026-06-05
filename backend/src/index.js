@@ -41,15 +41,27 @@ app.use("/api/messages", messageRoutes);
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-if(process.env.NODE_ENV==="production"){
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
+// if(process.env.NODE_ENV==="production"){
+//   app.use(express.static(path.join(__dirname, "/frontend/dist")));
  
   
-  app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  })
-}
+//   app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   })
+// }
 
+
+if (process.env.NODE_ENV === "production") {
+  const frontendPath = path.join(__dirname, "frontend", "dist");
+
+  console.log("Serving frontend from:", frontendPath);
+
+  app.use(express.static(frontendPath));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+}
 // app.get("/", (req, res) => {
 //   res.send("Chat App Backend is Running");
 // });
