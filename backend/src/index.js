@@ -21,7 +21,10 @@ const __dirname= path.resolve();
 connectDB();
 
 app.use(cors({
-  origin: "http://localhost:5173",
+   origin: [
+    "http://localhost:5173",
+    "https://fullstack-chat-apps-sxky.onrender.com"
+  ],
   credentials: true,
 }));
 app.use(express.json());
@@ -39,7 +42,7 @@ app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 if(process.env.NODE_ENV==="production"){
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  app.use(express.static(path.join(__dirname, "/frontend/dist")));
  
   
   app.get("*", (req, res) => {

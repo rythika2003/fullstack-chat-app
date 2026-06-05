@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 config();
 
 const seedUsers= [
-//female users
+//female 10  users
 
  {
     fullName: "Emma Johnson",

@@ -67,7 +67,7 @@ sendMessage: async (messageData) => {
        
      const socket = useAuthStore.getState().socket;
 
-      //todo: optimize this one later
+      // todo: optimize this one later
 
       socket.on("newMessage", (newMessage) => {
         // const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
